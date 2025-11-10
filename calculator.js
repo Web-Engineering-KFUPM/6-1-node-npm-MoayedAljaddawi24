@@ -177,3 +177,10 @@ After completing all TODOs, test your calculator:
 import { add, subtract, multiply, divide } from "./utils/operations.js";
 import { parseNumbers, isValidOperation } from "./utils/parser.js";
 import _ from "lodash"; 
+
+const [, , operation, ...numberArgs] = process.argv;
+
+if (!operation) {
+  console.log("Usage: node calculator.js <add|subtract|multiply|divide> <numbers...>");
+  process.exit(1);
+}
