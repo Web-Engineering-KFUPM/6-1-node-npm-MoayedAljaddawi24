@@ -184,3 +184,41 @@ if (!operation) {
   console.log("Usage: node calculator.js <add|subtract|multiply|divide> <numbers...>");
   process.exit(1);
 }
+
+if (!isValidOperation(operation)) {
+  console.log("Invalid operation. Use: add, subtract, multiply, or divide");
+  process.exit(1);
+}
+
+const nums = parseNumbers(numberArgs);
+
+if (nums.length === 0) {
+  console.log("Please provide at least one valid number.");
+  process.exit(1);
+}
+
+let result;
+
+switch (operation) {
+  case "add":
+    result = add(nums);
+    break;
+  case "subtract":
+    result = subtract(nums);
+    break;
+  case "multiply":
+    result = multiply(nums);
+    break;
+  case "divide":
+    result = divide(nums);
+    if (!Number.isFinite(result)) {
+      console.log("Error: division by zero.");
+      process.exit(1);
+    }
+    break;
+  default:
+    console.log("Invalid operation. Use: add, subtract, multiply, or divide");
+    process.exit(1);
+}
+
+console.log(`Result: ${result}`);
